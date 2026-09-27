@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QUIZZY | Learn. Play. Level Up.</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- App Container -->
+  <div id="app" class="app-container">
+    
+    <!-- Sidebar (Desktop) & Mobile Nav -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <h1>QUIZZY</h1>
+      </div>
+      <ul class="nav-links">
+        <li class="nav-item active" data-target="home-view">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          Home
+        </li>
+        <li class="nav-item" data-target="leaderboard-view">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-8"></path><path d="M18 20V10"></path><path d="M6 20V6"></path></svg>
+          Leaderboard
+        </li>
+        <li class="nav-item" data-target="profile-view">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          Profile
+        </li>
+      </ul>
+      <div class="sidebar-profile" data-target="profile-view">
+        <img src="/assets/avatars/claire.svg" alt="Profile Avatar" id="nav-avatar" />
+        <div class="sidebar-profile-info">
+          <span class="nav-name">Aparna</span>
+          <span class="nav-level">Silver Level</span>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <div class="mobile-brand">QUIZZY</div>
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </header>
+
+    <!-- Mobile Navigation Menu Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+      <ul class="mobile-nav-links">
+        <li class="mobile-nav-item active" data-target="home-view">Home</li>
+        <li class="mobile-nav-item" data-target="leaderboard-view">Leaderboard</li>
+        <li class="mobile-nav-item" data-target="profile-view">Profile</li>
+      </ul>
+      <button class="mobile-close-btn" id="mobile-close-btn">Close</button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- 1. HOME VIEW -->
+      <section id="home-view" class="view active-view">
+        <header class="view-header">
+          <h2>Hi, Aparna! 👋</h2>
+          <p>Ready for today's challenge?</p>
+        </header>
+        
+        <div class="home-layout">
+          <div class="home-main-col">
+            <!-- Daily Challenge -->
+            <div class="card daily-challenge-card">
+              <div class="challenge-content">
+                <span class="tag">DAILY STREAK</span>
+                <h3><span id="streak-xp-display">540</span> XP</h3>
+                <p>Keep your streak alive to unlock mystery rewards!</p>
+                <div class="reward-progression">
+                  <span>💎</span><span>💎</span><span>💎</span><span>💎</span><span>🎁</span>
+                </div>
+                <button class="btn btn-primary" id="btn-daily-challenge">START QUIZ</button>
+              </div>
+              <div class="challenge-visual">
+                <img src="/assets/avatars/maya.svg" alt="Maya Avatar" />
+              </div>
+            </div>
+            
+            <!-- Categories -->
+            <div class="categories-section">
+              <h3>Categories</h3>
+              <div class="categories-grid" id="categories-container">
+                 <!-- JS populated -->
+              </div>
+            </div>
+            
+            <!-- Continue Playing -->
+            <div class="continue-playing-section">
+              <h3>Continue Playing</h3>
+              <div class="continue-list">
+                <div class="continue-card">
+                  <div class="continue-info">
+                    <h4>Space Exploration</h4>
+                    <p>Science</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 60%"></div></div>
+                    <span class="progress-text">3 / 5 questions completed</span>
+                  </div>
+                  <button class="btn btn-secondary btn-sm play-btn" data-category="Science">PLAY</button>
+                </div>
+                <div class="continue-card">
+                  <div class="continue-info">
+                    <h4>90s Blockbusters</h4>
+                    <p>Movies</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 20%"></div></div>
+                    <span class="progress-text">1 / 5 questions completed</span>
+                  </div>
+                  <button class="btn btn-secondary btn-sm play-btn" data-category="Movies">PLAY</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Sidebar / Info cards -->
+          <div class="home-side-col">
+             <!-- Leaderboard Preview -->
+             <div class="card leaderboard-preview">
+               <div class="card-header">
+                 <h3>Top Players</h3>
+                 <button class="text-link" id="view-all-leaderboard">View All</button>
+               </div>
+               <div class="leaderboard-list">
+                 <div class="lb-item"><span class="rank">1</span><img src="/assets/avatars/maya.svg" alt="Maya"/><span class="name">Maya</span><span class="xp">1242 XP</span></div>
+                 <div class="lb-item"><span class="rank">2</span><img src="/assets/avatars/claire.svg" alt="Claire"/><span class="name">Claire</span><span class="xp">1242 XP</span></div>
+                 <div class="lb-item"><span class="rank">3</span><img src="/assets/avatars/evan.svg" alt="Evan"/><span class="name">Evan</span><span class="xp">1103 XP</span></div>
+               </div>
+             </div>
+             
+             <!-- Friends -->
+             <div class="card friends-preview">
+               <div class="card-header">
+                 <h3>Friends</h3>
+               </div>
+               <div class="friends-list">
+                 <div class="friend-item"><img src="/assets/avatars/noah.svg" alt="Noah"/><span class="name">Noah</span><span class="xp">950 XP</span></div>
+                 <div class="friend-item"><img src="/assets/avatars/riya.svg" alt="Riya"/><span class="name">Riya</span><span class="xp">710 XP</span></div>
+                 <div class="friend-item"><img src="/assets/avatars/sam.svg" alt="Sam"/><span class="name">Sam</span><span class="xp">390 XP</span></div>
+               </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. QUIZ VIEW -->
+      <section id="quiz-view" class="view hidden">
+        <div class="quiz-container card">
+          <header class="quiz-header">
+            <span class="quiz-category" id="quiz-category-title">Category</span>
+            <div class="quiz-progress-text">Question <span id="current-question-num">1</span> / <span id="total-questions-num">5</span></div>
+          </header>
+          
+          <div class="quiz-progress-bar-container">
+            <div class="quiz-progress-bar" id="quiz-progress-fill"></div>
+          </div>
+          
+          <div class="quiz-timer-container">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span id="quiz-timer" class="quiz-timer-text">15s</span>
+          </div>
+
+          <div class="quiz-body">
+            <h2 id="quiz-question-text" class="question-text">Question text goes here?</h2>
+            <div class="options-grid" id="quiz-options-container">
+              <!-- Options populated by JS -->
+            </div>
+          </div>
+
+          <footer class="quiz-footer">
+            <button class="btn btn-primary" id="btn-quiz-action" disabled>CHECK ANSWER</button>
+          </footer>
+        </div>
+      </section>
+
+      <!-- 3. RESULT VIEW -->
+      <section id="result-view" class="view hidden">
+        <div class="result-container card text-center">
+          <div class="result-icon">🎉</div>
+          <h2>QUIZ COMPLETE!</h2>
+          <div class="result-avatar">
+            <img src="/assets/avatars/maya.svg" alt="Celebration Avatar" />
+          </div>
+          <h3 id="result-message" class="result-message">Excellent!</h3>
+          
+          <div class="result-stats">
+            <div class="stat-box">
+              <span class="stat-value text-accent" id="result-xp">85</span>
+              <span class="stat-label">XP Earned</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="result-correct">8</span>
+              <span class="stat-label">Correct</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="result-wrong">2</span>
+              <span class="stat-label">Wrong</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="result-accuracy">80%</span>
+              <span class="stat-label">Accuracy</span>
+            </div>
+          </div>
+          
+          <div class="result-streak">
+            <span class="streak-icon">🔥</span> <span id="result-streak-text">4 DAY STREAK</span>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn btn-primary" id="btn-play-again">PLAY AGAIN</button>
+            <button class="btn btn-secondary" id="btn-back-home">BACK TO HOME</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. LEADERBOARD VIEW -->
+      <section id="leaderboard-view" class="view hidden">
+        <header class="view-header">
+          <h2>LEADERBOARD</h2>
+          <p>See where you stand among your friends!</p>
+        </header>
+
+        <div class="leaderboard-container card">
+          <div class="top-three">
+            <div class="top-player rank-2">
+              <div class="avatar-wrap"><img src="/assets/avatars/claire.svg" alt="Claire"/></div>
+              <span class="name">Claire</span>
+              <span class="xp">1103 XP</span>
+            </div>
+            <div class="top-player rank-1">
+              <div class="avatar-wrap"><img src="/assets/avatars/maya.svg" alt="Maya"/></div>
+              <span class="name">Maya</span>
+              <span class="xp">1242 XP</span>
+            </div>
+            <div class="top-player rank-3">
+              <div class="avatar-wrap"><img src="/assets/avatars/evan.svg" alt="Evan"/></div>
+              <span class="name">Evan</span>
+              <span class="xp">987 XP</span>
+            </div>
+          </div>
+
+          <div class="leaderboard-list full-list">
+            <div class="lb-item"><span class="rank">4</span><img src="/assets/avatars/noah.svg" alt="Noah"/><span class="name">Noah</span><span class="xp">950 XP</span></div>
+            <div class="lb-item"><span class="rank">5</span><img src="/assets/avatars/riya.svg" alt="Riya"/><span class="name">Riya</span><span class="xp">710 XP</span></div>
+            <div class="lb-item"><span class="rank">6</span><img src="/assets/avatars/sam.svg" alt="Sam"/><span class="name">Sam</span><span class="xp">390 XP</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. PROFILE VIEW -->
+      <section id="profile-view" class="view hidden">
+        <header class="view-header">
+          <h2>PROFILE</h2>
+        </header>
+        
+        <div class="profile-layout">
+          <div class="profile-card card text-center">
+            <img src="/assets/avatars/claire.svg" alt="Profile" class="profile-large-avatar" />
+            <h3 class="profile-name">Aparna</h3>
+            <span class="profile-level">Silver Level</span>
+            
+            <div class="profile-highlight-stats">
+              <div class="ph-stat">
+                <span class="ph-val text-accent" id="profile-xp-display">540</span>
+                <span class="ph-label">XP</span>
+              </div>
+              <div class="ph-stat">
+                <span class="ph-val"><span class="streak-icon">🔥</span> <span id="profile-streak-display">7</span></span>
+                <span class="ph-label">Day Streak</span>
+              </div>
+            </div>
+
+            <div class="profile-detailed-stats">
+              <div class="pd-stat">
+                <span class="pd-label">Quizzes Completed</span>
+                <span class="pd-val" id="profile-completed">12</span>
+              </div>
+              <div class="pd-stat">
+                <span class="pd-label">Correct Answers</span>
+                <span class="pd-val" id="profile-correct">42</span>
+              </div>
+              <div class="pd-stat">
+                <span class="pd-label">Accuracy</span>
+                <span class="pd-val" id="profile-accuracy">82%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="recent-quizzes card">
+            <h3>Recent Quizzes</h3>
+            <div class="recent-list" id="recent-quizzes-list">
+              <div class="recent-item">
+                <span class="recent-name">Science Knowledge</span>
+                <span class="recent-score">85%</span>
+              </div>
+              <div class="recent-item">
+                <span class="recent-name">Technology Basics</span>
+                <span class="recent-score">70%</span>
+              </div>
+              <div class="recent-item">
+                <span class="recent-name">General Knowledge</span>
+                <span class="recent-score">90%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
